@@ -1,0 +1,3 @@
+DocId,Namespace,Type,Member,linux,osx,win
+"M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",System,Activator,"CreateInstance(Type, BindingFlags, Binder, Object[], CultureInfo)",X,X,X
+"M:System.Activator.CreateInstance(System.Type,System.Object[])",System,Activator,"CreateInstance(Type, Object[])",X,X,X

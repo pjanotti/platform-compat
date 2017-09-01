@@ -18,20 +18,25 @@ namespace ex_gen
 {
     internal static class Program
     {
+        const string ExclusionFileSwitch = "-exc";
+        const string SourcePathSwitch = "-src";
+
         private static int Main(string[] args)
         {
-            if (args.Length != 1)
+            if (!TryParseArguments(args, out string exclusionFile, out string sourcePath, out string outputPath))
             {
                 var toolName = Path.GetFileNameWithoutExtension(Environment.GetCommandLineArgs()[0]);
-                Console.Error.WriteLine($"Usage: {toolName} <out-path>");
+                Console.Error.WriteLine($"Usage: {toolName} [options] <out-path>");
+                Console.Error.WriteLine($"\nOptions:\n");
+                Console.Error.WriteLine($"\t{ExclusionFileSwitch}:<exclusion-file>");
+                Console.Error.WriteLine($"\t{SourcePathSwitch}:<sourch-path>");
+                Console.Error.WriteLine();
                 return 1;
             }
 
-            var outputPath = Path.GetFullPath(args[0]);
-
             try
             {
-                Run(outputPath);
+                Run(exclusionFile, sourcePath, outputPath);
                 return 0;
             }
             catch (Exception ex)
@@ -41,29 +46,69 @@ namespace ex_gen
             }
         }
 
-        private static void Run(string outputPath)
+        private static bool TryParseArguments(string[] args, out string exclusionFile, out string sourcePath, out string outputPath)
         {
-            var rootUrl = "https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/";
-            var files = new[]
-            {
-                "dotnet-dev-win-x64.latest.zip",
-                "dotnet-dev-osx-x64.latest.tar.gz",
-                "dotnet-dev-linux-x64.latest.tar.gz"
-            };
+            const int minArgsLength = 1;
+            const int maxArgsLength = 3;
 
-            var tempFolder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-            Directory.CreateDirectory(tempFolder);
+            exclusionFile = sourcePath = outputPath = null;
+            if (args.Length < minArgsLength || args.Length > maxArgsLength)
+                return false;
+
+            for (var i = 0; i < args.Length - 1; ++i)
+            {
+                var tokens = args[i].Split(new[] { ':' }, 2);
+                if (tokens.Length != 2)
+                    return false;
+
+                switch (tokens[0])
+                {
+                    case ExclusionFileSwitch:
+                        exclusionFile = Path.GetFullPath(tokens[1]);
+                        break;
+                    case SourcePathSwitch:
+                        sourcePath = Path.GetFullPath(tokens[1]);
+                        break;
+                    default:
+                        return false;
+                }
+            }
+
+            outputPath = Path.GetFullPath(args[args.Length - 1]);
+
+            return true;
+        }
+
+        private static void Run(string exclusionFile, string sourcePath, string outputPath)
+        {
+            string tempFolder = null;
             try
             {
-                DownloadFiles(rootUrl, files, tempFolder);
-                ExtractFiles(tempFolder);
+                if (sourcePath == null)
+                {
+                    tempFolder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                    Directory.CreateDirectory(tempFolder);
 
-                var database = Scan(tempFolder);
+                    var rootUrl = "https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/";
+                    var files = new[]
+                    {
+                        "dotnet-dev-win-x64.latest.zip",
+                        "dotnet-dev-osx-x64.latest.tar.gz",
+                        "dotnet-dev-linux-x64.latest.tar.gz"
+                    };
+
+                    DownloadFiles(rootUrl, files, tempFolder);
+                    ExtractFiles(tempFolder);
+                    sourcePath = tempFolder;
+                }
+
+                var database = Scan(sourcePath, exclusionFile);
                 ExportCsv(database, outputPath);
             }
             finally
             {
-                Directory.Delete(tempFolder, true);
+                if (tempFolder != null)
+                    Directory.Delete(tempFolder, true);
             }
         }
 
@@ -113,6 +158,8 @@ namespace ex_gen
 
         private static void ExtractArchives(string tempFolder)
         {
+            var options = new ExtractionOptions { ExtractFullPath = true, Overwrite = true };
+
             foreach (var fileName in Directory.GetFiles(tempFolder))
             {
                 Console.WriteLine("\t" + Path.GetFileName(fileName));
@@ -123,11 +170,14 @@ namespace ex_gen
                 using (var fileStream = File.OpenRead(fileName))
                 using (var archive = OpenArchive(fileStream))
                 {
-                    archive.WriteToDirectory(exractedFolderPath, new ExtractionOptions
-                    {
-                        ExtractFullPath = true,
-                        Overwrite = true,
-                    });
+                    var selectedEntries = archive.Entries.Where(
+                        e => e.Key.StartsWith(@"./shared/Microsoft.NETCore.App/") ||
+                        e.Key.StartsWith(@"shared/Microsoft.NETCore.App/"));
+                    if (!selectedEntries.Any())
+                        throw new ArgumentException($"No archive selected to be extracted from {fileName} at {tempFolder}");
+
+                    foreach (var entry in selectedEntries)
+                        entry.WriteToDirectory(exractedFolderPath, options);
                 }
 
                 File.Delete(fileName);
@@ -148,11 +198,11 @@ namespace ex_gen
             }
         }
 
-        private static Database Scan(string tempFolder)
+        private static Database Scan(string tempFolder, string exclusionFile)
         {
             Console.WriteLine("Analyzing...");
-
-            var result = new Database();
+            var exclusionDatabase = exclusionFile != null ? ImportCsv(exclusionFile) : null;
+            var result = new Database(exclusionDatabase);
 
             var platforms = EnumeratePlatformDirectories(tempFolder);
 
@@ -225,6 +275,30 @@ namespace ex_gen
                     writer.WriteLine();
                 }
             }
+        }
+
+        private static Database ImportCsv(string path)
+        {
+            var database = new Database();
+
+            using (var streamReader = new StreamReader(path))
+            {
+                var csvReader = new CsvReader(streamReader);
+                var headerFields = csvReader.ReadLine();
+
+                while (!streamReader.EndOfStream)
+                {
+                    var row = csvReader.ReadLine();
+                    // Add the entry for each platform
+                    for (var i = 4; i < headerFields.Length; ++i)
+                    {
+                        if (!string.IsNullOrWhiteSpace(row[i]))
+                            database.Add(row[0], row[1], row[2], row[3], headerFields[i]);
+                    }
+                }
+            }
+
+            return database;
         }
     }
 }

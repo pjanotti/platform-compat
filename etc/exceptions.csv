@@ -51,17 +51,8 @@ M:Microsoft.Win32.SafeHandles.SafeNCryptKeyHandle.#ctor,Microsoft.Win32.SafeHand
 "M:Microsoft.Win32.SafeHandles.SafeNCryptKeyHandle.#ctor(System.IntPtr,System.Runtime.InteropServices.SafeHandle)",Microsoft.Win32.SafeHandles,SafeNCryptKeyHandle,".ctor(IntPtr, SafeHandle)",X,X,
 M:Microsoft.Win32.SafeHandles.SafeNCryptProviderHandle.#ctor,Microsoft.Win32.SafeHandles,SafeNCryptProviderHandle,.ctor(),X,X,
 M:Microsoft.Win32.SafeHandles.SafeNCryptSecretHandle.#ctor,Microsoft.Win32.SafeHandles,SafeNCryptSecretHandle,.ctor(),X,X,
-"M:System.Activator.CreateComInstanceFrom(System.String,System.String)",System,Activator,"CreateComInstanceFrom(String, String)",X,X,X
-"M:System.Activator.CreateComInstanceFrom(System.String,System.String,System.Byte[],System.Configuration.Assemblies.AssemblyHashAlgorithm)",System,Activator,"CreateComInstanceFrom(String, String, Byte[], AssemblyHashAlgorithm)",X,X,X
-"M:System.Activator.CreateInstance(System.String,System.String)",System,Activator,"CreateInstance(String, String)",X,X,X
-"M:System.Activator.CreateInstance(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[])",System,Activator,"CreateInstance(String, String, Boolean, BindingFlags, Binder, Object[], CultureInfo, Object[])",X,X,X
-"M:System.Activator.CreateInstance(System.String,System.String,System.Object[])",System,Activator,"CreateInstance(String, String, Object[])",X,X,X
-"M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",System,Activator,"CreateInstance(Type, BindingFlags, Binder, Object[], CultureInfo)",X,X,X
 "M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[])",System,Activator,"CreateInstance(Type, BindingFlags, Binder, Object[], CultureInfo, Object[])",X,X,X
-"M:System.Activator.CreateInstance(System.Type,System.Object[])",System,Activator,"CreateInstance(Type, Object[])",X,X,X
 "M:System.Activator.CreateInstance(System.Type,System.Object[],System.Object[])",System,Activator,"CreateInstance(Type, Object[], Object[])",X,X,X
-"M:System.Activator.CreateInstanceFrom(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[])",System,Activator,"CreateInstanceFrom(String, String, Boolean, BindingFlags, Binder, Object[], CultureInfo, Object[])",X,X,X
-"M:System.Activator.CreateInstanceFrom(System.String,System.String,System.Object[])",System,Activator,"CreateInstanceFrom(String, String, Object[])",X,X,X
 M:System.AppDomain.CreateDomain(System.String),System,AppDomain,CreateDomain(String),X,X,X
 "M:System.AppDomain.ExecuteAssembly(System.String,System.String[],System.Byte[],System.Configuration.Assemblies.AssemblyHashAlgorithm)",System,AppDomain,"ExecuteAssembly(String, String[], Byte[], AssemblyHashAlgorithm)",X,X,X
 P:System.AppDomain.MonitoringIsEnabled,System,AppDomain,MonitoringIsEnabled,X,X,X
@@ -91,8 +82,6 @@ P:System.Console.WindowHeight,System,Console,WindowHeight,X,X,
 P:System.Console.WindowLeft,System,Console,WindowLeft,X,X,
 P:System.Console.WindowTop,System,Console,WindowTop,X,X,
 P:System.Console.WindowWidth,System,Console,WindowWidth,X,X,
-"M:System.Console.Write(System.String,System.Object,System.Object,System.Object,System.Object,__arglist)",System,Console,"Write(String, Object, Object, Object, Object, __arglist)",X,X,X
-"M:System.Console.WriteLine(System.String,System.Object,System.Object,System.Object,System.Object,__arglist)",System,Console,"WriteLine(String, Object, Object, Object, Object, __arglist)",X,X,X
 E:System.Exception.SerializeObjectState,System,Exception,SerializeObjectState,X,X,X
 M:System.MarshalByRefObject.GetLifetimeService,System,MarshalByRefObject,GetLifetimeService(),X,X,X
 M:System.MarshalByRefObject.InitializeLifetimeService,System,MarshalByRefObject,InitializeLifetimeService(),X,X,X
@@ -245,18 +234,13 @@ M:System.Linq.EnumerableQuery`1.System#Linq#IQueryProvider#Execute(System.Linq.E
 M:System.Linq.Queryable.AsQueryable(System.Collections.IEnumerable),System.Linq,Queryable,AsQueryable(IEnumerable),X,X,X
 "M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)",System.Net,AuthenticationManager,"Authenticate(String, WebRequest, ICredentials)",X,X,X
 "M:System.Net.AuthenticationManager.PreAuthenticate(System.Net.WebRequest,System.Net.ICredentials)",System.Net,AuthenticationManager,"PreAuthenticate(WebRequest, ICredentials)",X,X,X
-P:System.Net.HttpListener.TimeoutManager,System.Net,HttpListener,TimeoutManager,X,X,
 P:System.Net.HttpListener.UnsafeConnectionNtlmAuthentication,System.Net,HttpListener,UnsafeConnectionNtlmAuthentication,X,X,
-P:System.Net.HttpListenerTimeoutManager.DrainEntityBody,System.Net,HttpListenerTimeoutManager,DrainEntityBody,X,X,
 P:System.Net.HttpListenerTimeoutManager.EntityBody,System.Net,HttpListenerTimeoutManager,EntityBody,X,X,
 P:System.Net.HttpListenerTimeoutManager.HeaderWait,System.Net,HttpListenerTimeoutManager,HeaderWait,X,X,
-P:System.Net.HttpListenerTimeoutManager.IdleConnection,System.Net,HttpListenerTimeoutManager,IdleConnection,X,X,
 P:System.Net.HttpListenerTimeoutManager.MinSendBytesPerSecond,System.Net,HttpListenerTimeoutManager,MinSendBytesPerSecond,X,X,
 P:System.Net.HttpListenerTimeoutManager.RequestQueue,System.Net,HttpListenerTimeoutManager,RequestQueue,X,X,
 "M:System.Net.HttpWebRequest.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",System.Net,HttpWebRequest,".ctor(SerializationInfo, StreamingContext)",X,X,X
 "M:System.Net.HttpWebRequest.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",System.Net,HttpWebRequest,"GetObjectData(SerializationInfo, StreamingContext)",X,X,X
-P:System.Net.HttpWebRequest.Host,System.Net,HttpWebRequest,Host,X,X,X
-P:System.Net.HttpWebRequest.MediaType,System.Net,HttpWebRequest,MediaType,X,X,X
 "M:System.Net.HttpWebRequest.System#Runtime#Serialization#ISerializable#GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",System.Net,HttpWebRequest,"System.Runtime.Serialization.ISerializable.GetObjectData(SerializationInfo, StreamingContext)",X,X,X
 "M:System.Net.HttpWebResponse.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",System.Net,HttpWebResponse,".ctor(SerializationInfo, StreamingContext)",X,X,X
 "M:System.Net.HttpWebResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",System.Net,HttpWebResponse,"GetObjectData(SerializationInfo, StreamingContext)",X,X,X
@@ -267,7 +251,6 @@ M:System.Net.SocketAddress.#ctor(System.Net.Sockets.AddressFamily),System.Net,So
 P:System.Net.SocketAddress.Family,System.Net,SocketAddress,Family,X,X,
 M:System.Net.SocketAddress.ToString,System.Net,SocketAddress,ToString(),X,X,
 M:System.Net.WebProxy.GetDefaultProxy,System.Net,WebProxy,GetDefaultProxy(),X,X,X
-P:System.Net.Http.HttpClientHandler.MaxConnectionsPerServer,System.Net.Http,HttpClientHandler,MaxConnectionsPerServer,X,X,
 P:System.Net.Http.HttpClientHandler.MaxRequestContentBufferSize,System.Net.Http,HttpClientHandler,MaxRequestContentBufferSize,X,X,X
 M:System.Net.Sockets.Socket.#ctor(System.Net.Sockets.SocketInformation),System.Net.Sockets,Socket,.ctor(SocketInformation),X,X,X
 M:System.Net.Sockets.Socket.AcceptAsync(System.Net.Sockets.SocketAsyncEventArgs),System.Net.Sockets,Socket,AcceptAsync(SocketAsyncEventArgs),X,X,
@@ -366,22 +349,9 @@ M:System.Runtime.InteropServices.Marshal.GetTypeFromCLSID(System.Guid),System.Ru
 M:System.Runtime.InteropServices.Marshal.GetTypeInfoName(System.Runtime.InteropServices.ComTypes.ITypeInfo),System.Runtime.InteropServices,Marshal,GetTypeInfoName(ITypeInfo),X,X,
 M:System.Runtime.InteropServices.Marshal.GetUniqueObjectForIUnknown(System.IntPtr),System.Runtime.InteropServices,Marshal,GetUniqueObjectForIUnknown(IntPtr),X,X,
 "M:System.Runtime.InteropServices.Marshal.QueryInterface(System.IntPtr,System.Guid@,System.IntPtr@)",System.Runtime.InteropServices,Marshal,"QueryInterface(IntPtr, Guid, IntPtr)",X,X,
-"M:System.Runtime.InteropServices.Marshal.ReadByte(System.Object,System.Int32)",System.Runtime.InteropServices,Marshal,"ReadByte(Object, Int32)",X,X,X
-"M:System.Runtime.InteropServices.Marshal.ReadInt16(System.Object,System.Int32)",System.Runtime.InteropServices,Marshal,"ReadInt16(Object, Int32)",X,X,X
-"M:System.Runtime.InteropServices.Marshal.ReadInt32(System.Object,System.Int32)",System.Runtime.InteropServices,Marshal,"ReadInt32(Object, Int32)",X,X,X
-"M:System.Runtime.InteropServices.Marshal.ReadInt64(System.Object,System.Int32)",System.Runtime.InteropServices,Marshal,"ReadInt64(Object, Int32)",X,X,X
-"M:System.Runtime.InteropServices.Marshal.ReadIntPtr(System.Object,System.Int32)",System.Runtime.InteropServices,Marshal,"ReadIntPtr(Object, Int32)",X,X,X
 M:System.Runtime.InteropServices.Marshal.Release(System.IntPtr),System.Runtime.InteropServices,Marshal,Release(IntPtr),X,X,
 M:System.Runtime.InteropServices.Marshal.ReleaseComObject(System.Object),System.Runtime.InteropServices,Marshal,ReleaseComObject(Object),X,X,
-M:System.Runtime.InteropServices.Marshal.SecureStringToBSTR(System.Security.SecureString),System.Runtime.InteropServices,Marshal,SecureStringToBSTR(SecureString),X,X,
 "M:System.Runtime.InteropServices.Marshal.SetComObjectData(System.Object,System.Object,System.Object)",System.Runtime.InteropServices,Marshal,"SetComObjectData(Object, Object, Object)",X,X,X
-"M:System.Runtime.InteropServices.Marshal.WriteByte(System.Object,System.Int32,System.Byte)",System.Runtime.InteropServices,Marshal,"WriteByte(Object, Int32, Byte)",X,X,X
-"M:System.Runtime.InteropServices.Marshal.WriteInt16(System.Object,System.Int32,System.Char)",System.Runtime.InteropServices,Marshal,"WriteInt16(Object, Int32, Char)",X,X,X
-"M:System.Runtime.InteropServices.Marshal.WriteInt16(System.Object,System.Int32,System.Int16)",System.Runtime.InteropServices,Marshal,"WriteInt16(Object, Int32, Int16)",X,X,X
-"M:System.Runtime.InteropServices.Marshal.WriteInt32(System.Object,System.Int32,System.Int32)",System.Runtime.InteropServices,Marshal,"WriteInt32(Object, Int32, Int32)",X,X,X
-"M:System.Runtime.InteropServices.Marshal.WriteInt64(System.Object,System.Int32,System.Int64)",System.Runtime.InteropServices,Marshal,"WriteInt64(Object, Int32, Int64)",X,X,X
-"M:System.Runtime.InteropServices.Marshal.WriteIntPtr(System.Object,System.Int32,System.IntPtr)",System.Runtime.InteropServices,Marshal,"WriteIntPtr(Object, Int32, IntPtr)",X,X,X
-M:System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(System.IntPtr),System.Runtime.InteropServices,Marshal,ZeroFreeBSTR(IntPtr),X,X,
 "M:System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeInterfaceAsIntPtr(System.Guid,System.Guid)",System.Runtime.InteropServices,RuntimeEnvironment,"GetRuntimeInterfaceAsIntPtr(Guid, Guid)",X,X,X
 "M:System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeInterfaceAsObject(System.Guid,System.Guid)",System.Runtime.InteropServices,RuntimeEnvironment,"GetRuntimeInterfaceAsObject(Guid, Guid)",X,X,X
 P:System.Runtime.InteropServices.RuntimeEnvironment.SystemConfigurationFile,System.Runtime.InteropServices,RuntimeEnvironment,SystemConfigurationFile,X,X,X
@@ -887,8 +857,6 @@ P:System.Security.Cryptography.CngUIPolicy.Description,System.Security.Cryptogra
 P:System.Security.Cryptography.CngUIPolicy.FriendlyName,System.Security.Cryptography,CngUIPolicy,FriendlyName,X,X,
 P:System.Security.Cryptography.CngUIPolicy.ProtectionLevel,System.Security.Cryptography,CngUIPolicy,ProtectionLevel,X,X,
 P:System.Security.Cryptography.CngUIPolicy.UseContext,System.Security.Cryptography,CngUIPolicy,UseContext,X,X,
-"M:System.Security.Cryptography.CryptoConfig.AddAlgorithm(System.Type,System.String[])",System.Security.Cryptography,CryptoConfig,"AddAlgorithm(Type, String[])",X,X,X
-"M:System.Security.Cryptography.CryptoConfig.AddOID(System.String,System.String[])",System.Security.Cryptography,CryptoConfig,"AddOID(String, String[])",X,X,X
 M:System.Security.Cryptography.CspKeyContainerInfo.#ctor(System.Security.Cryptography.CspParameters),System.Security.Cryptography,CspKeyContainerInfo,.ctor(CspParameters),X,X,
 P:System.Security.Cryptography.CspKeyContainerInfo.Accessible,System.Security.Cryptography,CspKeyContainerInfo,Accessible,X,X,
 P:System.Security.Cryptography.CspKeyContainerInfo.Exportable,System.Security.Cryptography,CspKeyContainerInfo,Exportable,X,X,
@@ -902,7 +870,6 @@ P:System.Security.Cryptography.CspKeyContainerInfo.ProviderType,System.Security.
 P:System.Security.Cryptography.CspKeyContainerInfo.RandomlyGenerated,System.Security.Cryptography,CspKeyContainerInfo,RandomlyGenerated,X,X,
 P:System.Security.Cryptography.CspKeyContainerInfo.Removable,System.Security.Cryptography,CspKeyContainerInfo,Removable,X,X,
 P:System.Security.Cryptography.CspKeyContainerInfo.UniqueKeyContainerName,System.Security.Cryptography,CspKeyContainerInfo,UniqueKeyContainerName,X,X,
-P:System.Security.Cryptography.CspParameters.KeyPassword,System.Security.Cryptography,CspParameters,KeyPassword,X,X,X
 M:System.Security.Cryptography.DSA.FromXmlString(System.String),System.Security.Cryptography,DSA,FromXmlString(String),X,X,X
 M:System.Security.Cryptography.DSA.ToXmlString(System.Boolean),System.Security.Cryptography,DSA,ToXmlString(Boolean),X,X,X
 M:System.Security.Cryptography.DSACng.#ctor,System.Security.Cryptography,DSACng,.ctor(),X,X,
@@ -935,7 +902,7 @@ P:System.Security.Cryptography.DSAOpenSsl.LegalKeySizes,System.Security.Cryptogr
 "M:System.Security.Cryptography.DSAOpenSsl.VerifySignature(System.Byte[],System.Byte[])",System.Security.Cryptography,DSAOpenSsl,"VerifySignature(Byte[], Byte[])",,,X
 M:System.Security.Cryptography.ECDsaCng.#ctor,System.Security.Cryptography,ECDsaCng,.ctor(),X,X,
 M:System.Security.Cryptography.ECDsaCng.#ctor(System.Security.Cryptography.CngKey),System.Security.Cryptography,ECDsaCng,.ctor(CngKey),X,X,
-M:System.Security.Cryptography.ECDsaCng.#ctor(System.Security.Cryptography.ECCurve),System.Security.Cryptography,ECDsaCng,.ctor(ECCurve),X,X,X
+M:System.Security.Cryptography.ECDsaCng.#ctor(System.Security.Cryptography.ECCurve),System.Security.Cryptography,ECDsaCng,.ctor(ECCurve),X,X,
 M:System.Security.Cryptography.ECDsaCng.#ctor(System.Int32),System.Security.Cryptography,ECDsaCng,.ctor(Int32),X,X,
 M:System.Security.Cryptography.ECDsaCng.ExportExplicitParameters(System.Boolean),System.Security.Cryptography,ECDsaCng,ExportExplicitParameters(Boolean),X,X,
 M:System.Security.Cryptography.ECDsaCng.ExportParameters(System.Boolean),System.Security.Cryptography,ECDsaCng,ExportParameters(Boolean),X,X,X
@@ -1000,7 +967,6 @@ M:System.Security.Cryptography.KeyedHashAlgorithm.Create,System.Security.Cryptog
 M:System.Security.Cryptography.KeyedHashAlgorithm.Create(System.String),System.Security.Cryptography,KeyedHashAlgorithm,Create(String),X,X,X
 M:System.Security.Cryptography.MD5CryptoServiceProvider.#ctor,System.Security.Cryptography,MD5CryptoServiceProvider,.ctor(),,X,
 "M:System.Security.Cryptography.PasswordDeriveBytes.CryptDeriveKey(System.String,System.String,System.Int32,System.Byte[])",System.Security.Cryptography,PasswordDeriveBytes,"CryptDeriveKey(String, String, Int32, Byte[])",X,X,
-P:System.Security.Cryptography.PKCS1MaskGenerationMethod.HashName,System.Security.Cryptography,PKCS1MaskGenerationMethod,HashName,X,X,X
 P:System.Security.Cryptography.RC2CryptoServiceProvider.UseSalt,System.Security.Cryptography,RC2CryptoServiceProvider,UseSalt,X,X,
 "M:System.Security.Cryptography.Rfc2898DeriveBytes.CryptDeriveKey(System.String,System.String,System.Int32,System.Byte[])",System.Security.Cryptography,Rfc2898DeriveBytes,"CryptDeriveKey(String, String, Int32, Byte[])",X,X,X
 P:System.Security.Cryptography.RijndaelManaged.BlockSize,System.Security.Cryptography,RijndaelManaged,BlockSize,X,X,X
@@ -1104,6 +1070,8 @@ M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Impor
 "M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Import(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)",System.Security.Cryptography.X509Certificates,X509Certificate2Collection,"Import(String, String, X509KeyStorageFlags)",,X,
 M:System.Security.Cryptography.X509Certificates.X509Chain.#ctor(System.IntPtr),System.Security.Cryptography.X509Certificates,X509Chain,.ctor(IntPtr),X,X,
 M:System.Security.Cryptography.X509Certificates.X509Store.#ctor(System.IntPtr),System.Security.Cryptography.X509Certificates,X509Store,.ctor(IntPtr),X,,
+"M:System.Security.Cryptography.X509Certificates.X509Store.#ctor(System.Security.Cryptography.X509Certificates.StoreName,System.Security.Cryptography.X509Certificates.StoreLocation,System.Security.Cryptography.X509Certificates.OpenFlags)",System.Security.Cryptography.X509Certificates,X509Store,".ctor(StoreName, StoreLocation, OpenFlags)",X,X,
+"M:System.Security.Cryptography.X509Certificates.X509Store.#ctor(System.String,System.Security.Cryptography.X509Certificates.StoreLocation,System.Security.Cryptography.X509Certificates.OpenFlags)",System.Security.Cryptography.X509Certificates,X509Store,".ctor(String, StoreLocation, OpenFlags)",X,X,
 M:System.Security.Cryptography.X509Certificates.X509Store.Open(System.Security.Cryptography.X509Certificates.OpenFlags),System.Security.Cryptography.X509Certificates,X509Store,Open(OpenFlags),X,X,
 M:System.Security.Principal.IdentityNotMappedException.#ctor,System.Security.Principal,IdentityNotMappedException,.ctor(),X,X,
 M:System.Security.Principal.IdentityNotMappedException.#ctor(System.String),System.Security.Principal,IdentityNotMappedException,.ctor(String),X,X,
@@ -1197,22 +1165,6 @@ M:System.Threading.AutoResetEvent.#ctor(System.Boolean),System.Threading,AutoRes
 M:System.Threading.EventWaitHandle.OpenExisting(System.String),System.Threading,EventWaitHandle,OpenExisting(String),X,X,
 "M:System.Threading.EventWaitHandle.TryOpenExisting(System.String,System.Threading.EventWaitHandle@)",System.Threading,EventWaitHandle,"TryOpenExisting(String, EventWaitHandle)",X,X,
 M:System.Threading.ManualResetEvent.#ctor(System.Boolean),System.Threading,ManualResetEvent,.ctor(Boolean),X,X,
-M:System.Threading.Overlapped.#ctor,System.Threading,Overlapped,.ctor(),X,X,
-"M:System.Threading.Overlapped.#ctor(System.Int32,System.Int32,System.Int32,System.IAsyncResult)",System.Threading,Overlapped,".ctor(Int32, Int32, Int32, IAsyncResult)",X,X,
-"M:System.Threading.Overlapped.#ctor(System.Int32,System.Int32,System.IntPtr,System.IAsyncResult)",System.Threading,Overlapped,".ctor(Int32, Int32, IntPtr, IAsyncResult)",X,X,
-P:System.Threading.Overlapped.AsyncResult,System.Threading,Overlapped,AsyncResult,X,X,
-P:System.Threading.Overlapped.EventHandle,System.Threading,Overlapped,EventHandle,X,X,
-P:System.Threading.Overlapped.EventHandleIntPtr,System.Threading,Overlapped,EventHandleIntPtr,X,X,
-M:System.Threading.Overlapped.Free(System.Threading.NativeOverlapped*),System.Threading,Overlapped,Free(NativeOverlapped*),X,X,
-P:System.Threading.Overlapped.OffsetHigh,System.Threading,Overlapped,OffsetHigh,X,X,
-P:System.Threading.Overlapped.OffsetLow,System.Threading,Overlapped,OffsetLow,X,X,
-M:System.Threading.Overlapped.Pack(System.Threading.IOCompletionCallback),System.Threading,Overlapped,Pack(IOCompletionCallback),X,X,
-"M:System.Threading.Overlapped.Pack(System.Threading.IOCompletionCallback,System.Object)",System.Threading,Overlapped,"Pack(IOCompletionCallback, Object)",X,X,
-M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*),System.Threading,Overlapped,Unpack(NativeOverlapped*),X,X,
-M:System.Threading.Overlapped.UnsafePack(System.Threading.IOCompletionCallback),System.Threading,Overlapped,UnsafePack(IOCompletionCallback),X,X,
-"M:System.Threading.Overlapped.UnsafePack(System.Threading.IOCompletionCallback,System.Object)",System.Threading,Overlapped,"UnsafePack(IOCompletionCallback, Object)",X,X,
-"M:System.Threading.PreAllocatedOverlapped.#ctor(System.Threading.IOCompletionCallback,System.Object,System.Object)",System.Threading,PreAllocatedOverlapped,".ctor(IOCompletionCallback, Object, Object)",X,X,
-M:System.Threading.PreAllocatedOverlapped.Dispose,System.Threading,PreAllocatedOverlapped,Dispose(),X,X,
 "M:System.Threading.Semaphore.#ctor(System.Int32,System.Int32)",System.Threading,Semaphore,".ctor(Int32, Int32)",X,X,
 "M:System.Threading.Semaphore.#ctor(System.Int32,System.Int32,System.String)",System.Threading,Semaphore,".ctor(Int32, Int32, String)",X,X,
 "M:System.Threading.Semaphore.#ctor(System.Int32,System.Int32,System.String,System.Boolean@)",System.Threading,Semaphore,".ctor(Int32, Int32, String, Boolean)",X,X,
@@ -1224,13 +1176,7 @@ M:System.Threading.Thread.ResetAbort,System.Threading,Thread,ResetAbort(),X,X,X
 M:System.Threading.Thread.Resume,System.Threading,Thread,Resume(),X,X,X
 M:System.Threading.Thread.SetApartmentState(System.Threading.ApartmentState),System.Threading,Thread,SetApartmentState(ApartmentState),X,X,
 M:System.Threading.Thread.Suspend,System.Threading,Thread,Suspend(),X,X,X
-"M:System.Threading.ThreadPoolBoundHandle.AllocateNativeOverlapped(System.Threading.IOCompletionCallback,System.Object,System.Object)",System.Threading,ThreadPoolBoundHandle,"AllocateNativeOverlapped(IOCompletionCallback, Object, Object)",X,X,
-M:System.Threading.ThreadPoolBoundHandle.AllocateNativeOverlapped(System.Threading.PreAllocatedOverlapped),System.Threading,ThreadPoolBoundHandle,AllocateNativeOverlapped(PreAllocatedOverlapped),X,X,
 M:System.Threading.ThreadPoolBoundHandle.BindHandle(System.Runtime.InteropServices.SafeHandle),System.Threading,ThreadPoolBoundHandle,BindHandle(SafeHandle),X,X,
-M:System.Threading.ThreadPoolBoundHandle.Dispose,System.Threading,ThreadPoolBoundHandle,Dispose(),X,X,
-M:System.Threading.ThreadPoolBoundHandle.FreeNativeOverlapped(System.Threading.NativeOverlapped*),System.Threading,ThreadPoolBoundHandle,FreeNativeOverlapped(NativeOverlapped*),X,X,
-M:System.Threading.ThreadPoolBoundHandle.GetNativeOverlappedState(System.Threading.NativeOverlapped*),System.Threading,ThreadPoolBoundHandle,GetNativeOverlappedState(NativeOverlapped*),X,X,
-P:System.Threading.ThreadPoolBoundHandle.Handle,System.Threading,ThreadPoolBoundHandle,Handle,X,X,
 "M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle)",System.Threading,WaitHandle,"SignalAndWait(WaitHandle, WaitHandle)",X,X,
 "M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)",System.Threading,WaitHandle,"SignalAndWait(WaitHandle, WaitHandle, Int32, Boolean)",X,X,
 "M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)",System.Threading,WaitHandle,"SignalAndWait(WaitHandle, WaitHandle, TimeSpan, Boolean)",X,X,
