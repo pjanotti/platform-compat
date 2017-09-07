@@ -18,25 +18,30 @@ namespace ex_gen
 {
     internal static class Program
     {
-        const string ExclusionFileSwitch = "-exc";
         const string SourcePathSwitch = "-src";
+        const string InclusionFileSwitch = "-inc";
+        const string ExclusionFileSwitch = "-exc";
+        const string OutputFileSwitch = "-out";
 
         private static int Main(string[] args)
         {
-            if (!TryParseArguments(args, out string exclusionFile, out string sourcePath, out string outputPath))
+            if (!TryParseArguments(args, out string sourcePath, out string inclusionFile, out string exclusionFile, out string outputPath))
             {
                 var toolName = Path.GetFileNameWithoutExtension(Environment.GetCommandLineArgs()[0]);
-                Console.Error.WriteLine($"Usage: {toolName} [options] <out-path>");
-                Console.Error.WriteLine($"\nOptions:\n");
+                Console.Error.WriteLine($"Usage: {toolName} [{SourcePathSwitch}:<src-path>] [{InclusionFileSwitch}:<inclusion-file>] [{ExclusionFileSwitch}:<exclusion-file>] {OutputFileSwitch}:<out-path>");
+                Console.Error.WriteLine($"\nOptional:\n");
+                Console.Error.WriteLine($"\t{SourcePathSwitch}:<source-path>");
+                Console.Error.WriteLine($"\t{InclusionFileSwitch}:<inclusion-file>");
                 Console.Error.WriteLine($"\t{ExclusionFileSwitch}:<exclusion-file>");
-                Console.Error.WriteLine($"\t{SourcePathSwitch}:<sourch-path>");
+                Console.Error.WriteLine($"\nMandatory:\n");
+                Console.Error.WriteLine($"\t{OutputFileSwitch}:<out-path>");
                 Console.Error.WriteLine();
                 return 1;
             }
 
             try
             {
-                Run(exclusionFile, sourcePath, outputPath);
+                Run(sourcePath, inclusionFile, exclusionFile, outputPath);
                 return 0;
             }
             catch (Exception ex)
@@ -46,40 +51,45 @@ namespace ex_gen
             }
         }
 
-        private static bool TryParseArguments(string[] args, out string exclusionFile, out string sourcePath, out string outputPath)
+        private static bool TryParseArguments(string[] args, out string sourcePath, out string inclusionFile, out string exclusionFile, out string outputPath)
         {
             const int minArgsLength = 1;
-            const int maxArgsLength = 3;
+            const int maxArgsLength = 4;
 
-            exclusionFile = sourcePath = outputPath = null;
+            sourcePath = inclusionFile = exclusionFile = outputPath = null;
             if (args.Length < minArgsLength || args.Length > maxArgsLength)
                 return false;
 
-            for (var i = 0; i < args.Length - 1; ++i)
+            for (var i = 0; i < args.Length; ++i)
             {
                 var tokens = args[i].Split(new[] { ':' }, 2);
                 if (tokens.Length != 2)
                     return false;
 
+                var fullPath = Path.GetFullPath(tokens[1]);
                 switch (tokens[0])
                 {
-                    case ExclusionFileSwitch:
-                        exclusionFile = Path.GetFullPath(tokens[1]);
-                        break;
                     case SourcePathSwitch:
-                        sourcePath = Path.GetFullPath(tokens[1]);
+                        sourcePath = fullPath;
+                        break;
+                    case InclusionFileSwitch:
+                        inclusionFile = fullPath;
+                        break;
+                    case ExclusionFileSwitch:
+                        exclusionFile = fullPath;
+                        break;
+                    case OutputFileSwitch:
+                        outputPath = fullPath;
                         break;
                     default:
                         return false;
                 }
             }
 
-            outputPath = Path.GetFullPath(args[args.Length - 1]);
-
-            return true;
+            return !string.IsNullOrWhiteSpace(outputPath);
         }
 
-        private static void Run(string exclusionFile, string sourcePath, string outputPath)
+        private static void Run(string sourcePath, string inclusionFile, string exclusionFile, string outputPath)
         {
             string tempFolder = null;
             try
@@ -89,20 +99,28 @@ namespace ex_gen
                     tempFolder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
                     Directory.CreateDirectory(tempFolder);
 
-                    var rootUrl = "https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/";
+                    var rootUrl = "https://dotnetcli.azureedge.net/dotnet/Sdk/2.0.0/";
                     var files = new[]
                     {
-                        "dotnet-dev-win-x64.latest.zip",
-                        "dotnet-dev-osx-x64.latest.tar.gz",
-                        "dotnet-dev-linux-x64.latest.tar.gz"
+                        "dotnet-sdk-2.0.0-win-x64.zip",
+                        "dotnet-sdk-2.0.0-osx-x64.tar.gz",
+                        "dotnet-sdk-2.0.0-linux-x64.tar.gz"
                     };
+
+                    ////var rootUrl = "https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/";
+                    ////var files = new[]
+                    ////{
+                    ////    "dotnet-dev-win-x64.latest.zip",
+                    ////    "dotnet-dev-osx-x64.latest.tar.gz",
+                    ////    "dotnet-dev-linux-x64.latest.tar.gz"
+                    ////};
 
                     DownloadFiles(rootUrl, files, tempFolder);
                     ExtractFiles(tempFolder);
                     sourcePath = tempFolder;
                 }
 
-                var database = Scan(sourcePath, exclusionFile);
+                var database = Scan(sourcePath, inclusionFile, exclusionFile);
                 ExportCsv(database, outputPath);
             }
             finally
@@ -172,7 +190,8 @@ namespace ex_gen
                 {
                     var selectedEntries = archive.Entries.Where(
                         e => e.Key.StartsWith(@"./shared/Microsoft.NETCore.App/") ||
-                        e.Key.StartsWith(@"shared/Microsoft.NETCore.App/"));
+                        e.Key.StartsWith(@"shared/Microsoft.NETCore.App/") ||
+                        e.Key.StartsWith(@"shared\Microsoft.NETCore.App\"));
                     if (!selectedEntries.Any())
                         throw new ArgumentException($"No archive selected to be extracted from {fileName} at {tempFolder}");
 
@@ -198,13 +217,22 @@ namespace ex_gen
             }
         }
 
-        private static Database Scan(string tempFolder, string exclusionFile)
+        private static Database Scan(string sourcePath, string inclusionFile, string exclusionFile)
         {
             Console.WriteLine("Analyzing...");
-            var exclusionDatabase = exclusionFile != null ? ImportCsv(exclusionFile) : null;
-            var result = new Database(exclusionDatabase);
 
-            var platforms = EnumeratePlatformDirectories(tempFolder);
+            Database exclusionDatabase = null;
+            if (exclusionFile != null)
+            {
+                exclusionDatabase = new Database();
+                ImportCsv(exclusionFile, exclusionDatabase);
+            }
+
+            var result = new Database(exclusionDatabase);
+            if (inclusionFile != null)
+                ImportCsv(inclusionFile, result);
+
+            var platforms = EnumeratePlatformDirectories(sourcePath);
 
             foreach (var entry in platforms)
             {
@@ -230,7 +258,7 @@ namespace ex_gen
 
             foreach (var root in roots)
             {
-                var match = Regex.Match(root, @"dotnet-dev-([^-]+)-[^-]+.latest");
+                var match = Regex.Match(root, @"dotnet-sdk-2.0.0-([^-]+)-x64" /* @"dotnet-dev-([^-]+)-[^-]+.latest" */);
                 var platform = match.Success ? match.Groups[1].Value : root;
 
                 var sharedFrameworkFolder = Path.Combine(root, "shared", "Microsoft.NETCore.App");
@@ -277,10 +305,8 @@ namespace ex_gen
             }
         }
 
-        private static Database ImportCsv(string path)
+        private static void ImportCsv(string path, Database database)
         {
-            var database = new Database();
-
             using (var streamReader = new StreamReader(path))
             {
                 var csvReader = new CsvReader(streamReader);
@@ -297,8 +323,6 @@ namespace ex_gen
                     }
                 }
             }
-
-            return database;
         }
     }
 }

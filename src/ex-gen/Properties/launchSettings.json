@@ -2,7 +2,7 @@
   "profiles": {
     "ex-gen": {
       "commandName": "Project",
-      "commandLineArgs": "-exc:..\\..\\etc\\exceptions-exclusions.csv -src:c:\\s\\ex-gen-tmp ..\\..\\etc\\exceptions.csv"
+      "commandLineArgs": "-inc:..\\..\\etc\\exceptions-inclusions.csv -exc:..\\..\\etc\\exceptions-exclusions.csv-out:..\\..\\etc\\exceptions.csv"
     }
   }
 }
